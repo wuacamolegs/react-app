@@ -1,26 +1,22 @@
-import React from 'react';
-import logo from './logo.svg';
-import './App.css';
+import React from "react";
+import { Provider } from "react-redux";
+import PropTypes from "prop-types";
+import { ConnectedRouter } from "connected-react-router";
+import { ThemeProvider } from "@increase/typed-components";
 
-function App() {
-  return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
-  );
-}
+import routes from "./Routes";
+
+const App = ({ history, store }) => (
+  <Provider store={store}>
+    <ThemeProvider>
+      <ConnectedRouter history={history}>{routes}</ConnectedRouter>
+    </ThemeProvider>
+  </Provider>
+);
+
+App.propTypes = {
+  history: PropTypes.object.isRequired,
+  store: PropTypes.object.isRequired
+};
 
 export default App;
